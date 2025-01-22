@@ -1,4 +1,4 @@
-import { MapPin } from "lucide-react";
+import { MapPin, Anchor } from "lucide-react";
 
 interface RouteOverviewProps {
   isVisible: boolean;
@@ -7,11 +7,12 @@ interface RouteOverviewProps {
 
 const RouteOverview = ({ isVisible, onClose }: RouteOverviewProps) => {
   const points = [
-    { name: "Central Station", time: "0 min" },
-    { name: "Anne Frank House", time: "10 min" },
-    { name: "Rijksmuseum", time: "25 min" },
-    { name: "Vondelpark", time: "35 min" },
-    { name: "Royal Palace", time: "45 min" },
+    { name: "Amsterdam Centraal (Dock)", time: "0 min", description: "Board your boat at the main dock" },
+    { name: "Maritime Museum", time: "10 min", description: "Pass by the historic VOC ship replica" },
+    { name: "Amstel River", time: "20 min", description: "Cruise under the famous Skinny Bridge" },
+    { name: "Canal Ring", time: "35 min", description: "UNESCO World Heritage canals" },
+    { name: "Anne Frank House", time: "45 min", description: "Historic site along the Prinsengracht" },
+    { name: "Centraal Return", time: "60 min", description: "Complete the circular route" },
   ];
 
   return (
@@ -22,7 +23,10 @@ const RouteOverview = ({ isVisible, onClose }: RouteOverviewProps) => {
     >
       <div className="p-4">
         <div className="w-12 h-1 bg-gray-200 rounded-full mx-auto mb-4" />
-        <h2 className="text-2xl font-semibold text-navy-900 mb-4">Classic Canal Tour</h2>
+        <div className="flex items-center gap-2 mb-4">
+          <Anchor className="h-6 w-6 text-water-600" />
+          <h2 className="text-2xl font-semibold text-navy-900">Classic Canal Tour</h2>
+        </div>
         <div className="space-y-6">
           {points.map((point, index) => (
             <div key={index} className="flex items-center">
@@ -34,7 +38,8 @@ const RouteOverview = ({ isVisible, onClose }: RouteOverviewProps) => {
               </div>
               <div className="ml-4 flex-1">
                 <p className="text-navy-900 font-medium">{point.name}</p>
-                <p className="text-sm text-navy-500">{point.time}</p>
+                <p className="text-sm text-navy-500">{point.description}</p>
+                <p className="text-sm text-navy-400">{point.time}</p>
               </div>
             </div>
           ))}
