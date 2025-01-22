@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -13,10 +13,29 @@ interface POI {
   audioUrl: string;
 }
 
+const DEFAULT_MAPBOX_TOKEN = "pk.eyJ1IjoibWVsYmF0b2FzdGplIiwiYSI6ImNtMzY1YjBkcjAxbmwyanF3c3oxeGRyYXYifQ.-MBdEjL8673RmCLjZ2MXMQ";
+
 const Admin = () => {
-  const [mapboxToken, setMapboxToken] = useState("");
+  const [mapboxToken, setMapboxToken] = useState(DEFAULT_MAPBOX_TOKEN);
   const [pois, setPois] = useState<POI[]>([]);
   const [newPoi, setNewPoi] = useState<Partial<POI>>({});
+
+  useEffect(() => {
+    // Load existing POIs from localStorage
+    const savedPois = localStorage.getItem("pois");
+    if (savedPois) {
+      setPois(JSON.parse(savedPois));
+    }
+    
+    // Set default token if none exists
+    if (!localStorage.getItem("mapbox_token")) {
+      localStorage.setItem("mapbox_token", DEFAULT_MAPBOX_TOKEN);
+      toast({
+        title: "Default Mapbox token set",
+        description: "The default Mapbox token has been configured.",
+      });
+    }
+  }, []);
 
   const handleSaveMapboxToken = () => {
     localStorage.setItem("mapbox_token", mapboxToken);
