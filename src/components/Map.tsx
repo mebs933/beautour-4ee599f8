@@ -45,58 +45,64 @@ const Map = ({ onLocationError }: MapProps) => {
     // Custom styling on style load
     map.current.on('style.load', () => {
       if (!map.current) return;
+      console.log('Style loaded, applying custom styling');
 
-      // Background
-      map.current.setPaintProperty('background', 'background-color', '#f8f8f8');
+      try {
+        // Background
+        map.current.setPaintProperty('background', 'background-color', '#f8f8f8');
 
-      // Water styling
-      map.current.setPaintProperty('water', 'fill-color', '#007bff');
-      map.current.setPaintProperty('water', 'fill-opacity', 0.8);
+        // Water styling
+        if (map.current.getLayer('water')) {
+          map.current.setPaintProperty('water', 'fill-color', '#007bff');
+          map.current.setPaintProperty('water', 'fill-opacity', 0.8);
+        }
 
-      // Building styling
-      map.current.setPaintProperty('building', 'fill-opacity', 0);
-      map.current.setPaintProperty('building-outline', 'line-color', '#e0e0e0');
-      map.current.setPaintProperty('building-outline', 'line-width', 1);
+        // Building styling
+        if (map.current.getLayer('building')) {
+          map.current.setPaintProperty('building', 'fill-opacity', 0);
+        }
+        
+        if (map.current.getLayer('building-outline')) {
+          map.current.setPaintProperty('building-outline', 'line-color', '#e0e0e0');
+          map.current.setPaintProperty('building-outline', 'line-width', 1);
+        }
 
-      // Road styling
-      const roadLayers = [
-        'road-primary',
-        'road-secondary',
-        'road-tertiary',
-        'road-street'
-      ];
+        // Road styling
+        const roadLayers = [
+          'road-primary',
+          'road-secondary',
+          'road-tertiary',
+          'road-street'
+        ];
 
-      roadLayers.forEach(layer => {
-        map.current?.setPaintProperty(layer, 'line-color', '#d3d3d3');
-        map.current?.setPaintProperty(layer, 'line-width', 1);
-        map.current?.setPaintProperty(layer, 'line-opacity', 0.8);
-      });
+        roadLayers.forEach(layer => {
+          if (map.current?.getLayer(layer)) {
+            map.current.setPaintProperty(layer, 'line-color', '#d3d3d3');
+            map.current.setPaintProperty(layer, 'line-width', 1);
+            map.current.setPaintProperty(layer, 'line-opacity', 0.8);
+          }
+        });
 
-      // Label styling
-      const labelLayers = [
-        'road-label',
-        'water-point-label',
-        'water-line-label'
-      ];
+        // Label styling
+        const labelLayers = [
+          'road-label',
+          'water-point-label',
+          'water-line-label'
+        ];
 
-      labelLayers.forEach(layer => {
-        map.current?.setLayoutProperty(layer, 'text-font', ['Manrope Regular']);
-        map.current?.setPaintProperty(layer, 'text-color', '#333');
-        map.current?.setPaintProperty(layer, 'text-halo-color', '#f8f8f8');
-        map.current?.setPaintProperty(layer, 'text-halo-width', 1);
-      });
+        labelLayers.forEach(layer => {
+          if (map.current?.getLayer(layer)) {
+            map.current.setLayoutProperty(layer, 'text-font', ['Manrope Regular']);
+            map.current.setPaintProperty(layer, 'text-color', '#333');
+            map.current.setPaintProperty(layer, 'text-halo-color', '#f8f8f8');
+            map.current.setPaintProperty(layer, 'text-halo-width', 1);
+          }
+        });
 
-      // Adjust label sizes
-      map.current?.setLayoutProperty('road-label', 'text-size', 12);
-      map.current?.setLayoutProperty('water-point-label', 'text-size', 14);
-      map.current?.setLayoutProperty('water-line-label', 'text-size', 14);
-
-      console.log('Custom map styling applied');
-    });
-
-    // Attempt to get user location on load
-    map.current.on('load', () => {
-      geolocate.trigger();
+        console.log('Custom map styling applied successfully');
+      } catch (error) {
+        console.error('Error applying custom styling:', error);
+      }
     });
 
     // Load and add POIs from localStorage
