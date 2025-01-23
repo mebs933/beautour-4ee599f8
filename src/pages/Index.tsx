@@ -11,10 +11,10 @@ const Index = () => {
 
   const handleRouteSelect = (duration: number) => {
     setShowSplash(false);
-    setIsRouteVisible(true);
+    setIsRouteVisible(false); // Start with route hidden to focus on map
     toast({
       title: "Route Selected",
-      description: `${duration} hour classic canal tour loaded`,
+      description: `${duration} hour classic canal tour loaded. Swipe up to see route details.`,
     });
   };
 
@@ -30,6 +30,14 @@ const Index = () => {
     <div className="relative h-screen w-full bg-navy-50">
       {showSplash && <SplashScreen onRouteSelect={handleRouteSelect} />}
       <Map onLocationError={handleLocationError} />
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
+        <button 
+          onClick={() => setIsRouteVisible(!isRouteVisible)}
+          className="text-sm text-navy-600"
+        >
+          {isRouteVisible ? "Hide Route Details" : "Show Route Details"}
+        </button>
+      </div>
       <RouteOverview 
         isVisible={isRouteVisible}
         onClose={() => setIsRouteVisible(false)}

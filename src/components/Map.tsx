@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -9,6 +9,7 @@ interface MapProps {
 const Map = ({ onLocationError }: MapProps) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
+  const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
 
   useEffect(() => {
     if (!mapContainer.current) return;
@@ -36,6 +37,22 @@ const Map = ({ onLocationError }: MapProps) => {
       "top-right"
     );
 
+    // Add geolocate control
+    const geolocate = new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true
+      },
+      trackUserLocation: true,
+      showUserHeading: true
+    });
+    
+    map.current.addControl(geolocate, "top-right");
+
+    // Attempt to get user location on load
+    map.current.on('load', () => {
+      geolocate.trigger();
+    });
+
     // Load and add POIs from localStorage
     const savedPois = localStorage.getItem("pois");
     if (savedPois) {
@@ -51,12 +68,16 @@ const Map = ({ onLocationError }: MapProps) => {
       });
     }
 
-    // Attempt to get user location
+    // Watch user location
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
+      navigator.geolocation.watchPosition(
         (position) => {
-          console.log("Location acquired:", position);
-          // Check for nearby POIs and trigger audio/overlay
+          const newLocation: [number, number] = [
+            position.coords.longitude,
+            position.coords.latitude
+          ];
+          setUserLocation(newLocation);
+          console.log("Updated user location:", newLocation);
           checkNearbyPOIs(position.coords);
         },
         (error) => {
