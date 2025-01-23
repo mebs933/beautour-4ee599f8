@@ -1,13 +1,23 @@
 import { useState } from "react";
 import Map from "@/components/Map";
 import RouteOverview from "@/components/RouteOverview";
+import SplashScreen from "@/components/SplashScreen";
 import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
   const { toast } = useToast();
-  const [isRouteVisible, setIsRouteVisible] = useState(true);
+  const [showSplash, setShowSplash] = useState(true);
+  const [isRouteVisible, setIsRouteVisible] = useState(false);
 
-  // Temporary function to show toast when GPS is not available
+  const handleRouteSelect = (duration: number) => {
+    setShowSplash(false);
+    setIsRouteVisible(true);
+    toast({
+      title: "Route Selected",
+      description: `${duration} hour classic canal tour loaded`,
+    });
+  };
+
   const handleLocationError = () => {
     toast({
       title: "Location Access Required",
@@ -18,6 +28,7 @@ const Index = () => {
 
   return (
     <div className="relative h-screen w-full bg-navy-50">
+      {showSplash && <SplashScreen onRouteSelect={handleRouteSelect} />}
       <Map onLocationError={handleLocationError} />
       <RouteOverview 
         isVisible={isRouteVisible}
