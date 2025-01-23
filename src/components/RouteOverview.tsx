@@ -22,7 +22,10 @@ const RouteOverview = ({ isVisible, onClose }: RouteOverviewProps) => {
       }`}
     >
       <div className="p-4">
-        <div className="w-12 h-1 bg-gray-200 rounded-full mx-auto mb-4" />
+        <div 
+          className="w-12 h-1 bg-gray-200 rounded-full mx-auto mb-4 cursor-pointer" 
+          onClick={onClose}
+        />
         <div className="flex items-center gap-2 mb-4">
           <Anchor className="h-6 w-6 text-water-600" />
           <h2 className="text-2xl font-semibold text-navy-900">Classic Canal Tour</h2>
