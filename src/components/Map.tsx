@@ -14,15 +14,8 @@ const Map = ({ onLocationError }: MapProps) => {
   useEffect(() => {
     if (!mapContainer.current) return;
 
-    // Get token from localStorage
-    const token = localStorage.getItem("mapbox_token");
-    if (!token) {
-      console.error("Mapbox token not found");
-      return;
-    }
-
-    // Initialize map
-    mapboxgl.accessToken = token;
+    // Initialize map with hardcoded token
+    mapboxgl.accessToken = "pk.eyJ1IjoibWVsYmF0b2FzdGplIiwiYSI6ImNtMzY1YjBkcjAxbmwyanF3c3oxeGRyYXYifQ.-MBdEjL8673RmCLjZ2MXMQ";
     
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
