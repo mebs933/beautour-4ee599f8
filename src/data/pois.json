@@ -3,35 +3,35 @@
       "id": "1",
       "name": "Anne Frank House",
       "coordinates": [52.375218, 4.883977],
-      "description": "We're approaching the Anne Frank House, a deeply moving place where Anne Frank wrote her famous diary. Big chance that you'll feel the history in the air as we pass by.",
+      "description": "Here we are, at the Anne Frank House... a place of deep history, where young Anne Frank wrote her famous diary. Look closely... you might feel the weight of history, the echoes of her words. It's a moving experience. A heads-up: it's often crowded here, a real gathering of boats! Let's take it slow, be mindful of others, and give everyone a chance to see. No rush.",
       "audioUrl": "/audio/anne_frank_house.mp3"
     },
     {
       "id": "2",
       "name": "Westerkerk",
       "coordinates": [52.374029, 4.883191],
-      "description": "If you look to your left, you'll see the majestic Westerkerk. This iconic church is a symbol of Amsterdam's rich history and stunning architecture.",
+      "description": "Look to your left! There's the Westerkerk! What a beauty. This isn't just any church; it's an icon, a symbol of Amsterdam's history and architecture. Imagine the stories those stones could tell. The bells, when they ring, it's like the city sings. And that spire! It's one of Amsterdam's highest, a true landmark.",
       "audioUrl": "/audio/westerkerk.mp3"
     },
     {
       "id": "3",
       "name": "The Skinny Bridge",
       "coordinates": [52.363636, 4.902704],
-      "description": "We're now approaching the Skinny Bridge, an incredible piece of engineering that lights up beautifully at night. It's a favorite spot for locals and tourists alike.",
+      "description": "Alright, get ready... we're coming up on the Magere Brug, the Skinny Bridge! And yes, it *is* skinny! This bridge is a marvel, a feat of engineering, especially considering its age. But the real magic happens at night. It's breathtaking! Lit up with hundreds of lights, it becomes something special. A favorite spot for lovers, photographers, anyone who appreciates romance. Get your cameras ready!",
       "audioUrl": "/audio/skinny_bridge.mp3"
     },
     {
       "id": "4",
       "name": "Rijksmuseum",
       "coordinates": [52.360031, 4.885219],
-      "description": "Amazing! To your right is the Rijksmuseum, home to some of the world's most famous artworks, including masterpieces by Rembrandt and Vermeer.",
+      "description": "Wow! Look to your right! The Rijksmuseum! This, my friends, is a treasure trove. We're talking about world-class art. Rembrandt! Vermeer! The masters are all here. It's massive; you could spend days exploring. Even from the canal, you get a sense of its grandeur. A must-see for any visitor, and even just passing by, it's a sight.",
       "audioUrl": "/audio/rijksmuseum.mp3"
     },
     {
       "id": "5",
       "name": "Hermitage Amsterdam",
       "coordinates": [52.366317, 4.902934],
-      "description": "Incredible! The Hermitage Amsterdam is a branch museum of the Hermitage Museum of Saint Petersburg, showcasing stunning exhibitions and collections.",
+      "description": "Incredible! And now, the Hermitage Amsterdam! A sister museum to the legendary Hermitage in Saint Petersburg, Russia. A piece of Russian imperial history right here on the Amstel! They host stunning exhibitions, showcasing incredible art and artifacts. It's a beautiful building, too, with a fascinating past. It used to be a retirement home! From caring for the elderly to housing priceless art... quite a change!",
       "audioUrl": "/audio/hermitage_amsterdam.mp3"
     }
   ]
