@@ -1,0 +1,16 @@
+[
+    {
+      "id": "1",
+      "name": "POI 1",
+      "coordinates": [52.3676, 4.9041],
+      "description": "Description for POI 1",
+      "audioUrl": "/audio/poi1.mp3"
+    },
+    {
+      "id": "2",
+      "name": "POI 2",
+      "coordinates": [52.368, 4.905],
+      "description": "Description for POI 2",
+      "audioUrl": "/audio/poi2.mp3"
+    }
+  ]
