@@ -1,16 +1,37 @@
 [
     {
       "id": "1",
-      "name": "POI 1",
-      "coordinates": [52.3676, 4.9041],
-      "description": "Description for POI 1",
-      "audioUrl": "/audio/poi1.mp3"
+      "name": "Anne Frank House",
+      "coordinates": [52.375218, 4.883977],
+      "description": "We're approaching the Anne Frank House, a deeply moving place where Anne Frank wrote her famous diary. Big chance that you'll feel the history in the air as we pass by.",
+      "audioUrl": "/audio/anne_frank_house.mp3"
     },
     {
       "id": "2",
-      "name": "POI 2",
-      "coordinates": [52.368, 4.905],
-      "description": "Description for POI 2",
-      "audioUrl": "/audio/poi2.mp3"
+      "name": "Westerkerk",
+      "coordinates": [52.374029, 4.883191],
+      "description": "If you look to your left, you'll see the majestic Westerkerk. This iconic church is a symbol of Amsterdam's rich history and stunning architecture.",
+      "audioUrl": "/audio/westerkerk.mp3"
+    },
+    {
+      "id": "3",
+      "name": "The Skinny Bridge",
+      "coordinates": [52.363636, 4.902704],
+      "description": "We're now approaching the Skinny Bridge, an incredible piece of engineering that lights up beautifully at night. It's a favorite spot for locals and tourists alike.",
+      "audioUrl": "/audio/skinny_bridge.mp3"
+    },
+    {
+      "id": "4",
+      "name": "Rijksmuseum",
+      "coordinates": [52.360031, 4.885219],
+      "description": "Amazing! To your right is the Rijksmuseum, home to some of the world's most famous artworks, including masterpieces by Rembrandt and Vermeer.",
+      "audioUrl": "/audio/rijksmuseum.mp3"
+    },
+    {
+      "id": "5",
+      "name": "Hermitage Amsterdam",
+      "coordinates": [52.366317, 4.902934],
+      "description": "Incredible! The Hermitage Amsterdam is a branch museum of the Hermitage Museum of Saint Petersburg, showcasing stunning exhibitions and collections.",
+      "audioUrl": "/audio/hermitage_amsterdam.mp3"
     }
   ]
