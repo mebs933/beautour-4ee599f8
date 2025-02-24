@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Play, Pause } from "lucide-react";
+import { Pause, Play } from "lucide-react";
 
 interface POI {
   id: string;
@@ -16,7 +16,8 @@ interface TourProps {
 }
 
 const Tour = ({ pois }: TourProps) => {
-  const [isPlaying, setIsPlaying] = React.useState(false);
+  const [isPlaying, setIsPlaying] = React.useState(true); // Default to playing when tour starts
+  const [currentPoiIndex, setCurrentPoiIndex] = React.useState(0);
 
   const togglePlayback = () => {
     setIsPlaying(!isPlaying);
@@ -24,24 +25,29 @@ const Tour = ({ pois }: TourProps) => {
   };
 
   return (
-    <Button
-      variant="ghost"
-      size="sm"
-      onClick={togglePlayback}
-      className="flex items-center gap-2"
-    >
-      {isPlaying ? (
-        <>
-          <Pause className="h-4 w-4" />
-          <span>Pause Tour</span>
-        </>
-      ) : (
-        <>
-          <Play className="h-4 w-4" />
-          <span>Start Tour</span>
-        </>
-      )}
-    </Button>
+    <div className="flex items-center gap-2">
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={togglePlayback}
+        className="flex items-center gap-2"
+      >
+        {isPlaying ? (
+          <>
+            <Pause className="h-4 w-4" />
+            <span>Pause</span>
+          </>
+        ) : (
+          <>
+            <Play className="h-4 w-4" />
+            <span>Resume</span>
+          </>
+        )}
+      </Button>
+      <span className="text-sm text-navy-600">
+        {currentPoiIndex + 1}/{pois.length} Stops
+      </span>
+    </div>
   );
 };
 
