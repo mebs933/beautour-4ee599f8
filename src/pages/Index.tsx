@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import Map from "@/components/Map";
 import RouteOverview from "@/components/RouteOverview";
@@ -23,8 +24,12 @@ const Index = () => {
   const [currentPOI, setCurrentPOI] = useState<POI | null>(null);
 
   useEffect(() => {
-    // Load POIs from JSON file
-    setPois(poisData);
+    // Load POIs from JSON file and ensure coordinates are properly typed
+    const typedPois = poisData.map(poi => ({
+      ...poi,
+      coordinates: poi.coordinates as [number, number]
+    }));
+    setPois(typedPois);
   }, []);
 
   const handleRouteSelect = (duration: number) => {
