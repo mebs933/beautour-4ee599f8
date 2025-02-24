@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -24,15 +25,15 @@ const Map = ({ onLocationError, onPOIProximity, pois }: MapProps) => {
   useEffect(() => {
     if (!mapContainer.current) return;
 
-    // Initialize map with hardcoded token
-    mapboxgl.accessToken = "pk.eyJ1IjoibWVsYmF0b2FzdGplIiwiYSI6ImNtMzY1YjBkcjAxbmwyanF3c3oxeGRyYXYifQ.-MBdEjL8673RmCLjZ2MXMQ";
+    // Initialize map with your custom style
+    mapboxgl.accessToken = "pk.eyJ1Ijoic3RlZWZuZWVmIiwiYSI6ImNtNXF2djk4dTAzcjQybnM4YXk3cXEyNjEifQ.M4_2E4ylBSyOddvKalMxkw";
     
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: "mapbox://styles/mapbox/light-v11",
-      center: [4.9041, 52.3676] as [number, number], // Amsterdam coordinates
-      zoom: 13,
-      pitch: 0, // Ensure flat view
+      style: "mapbox://styles/steefneef/cm7by9zjy007o01s788kl19l7",
+      center: [4.885119, 52.374495], // Centered on Amsterdam canal route
+      zoom: 15,
+      pitch: 0,
     });
 
     map.current.addControl(new mapboxgl.NavigationControl(), 'top-left');
@@ -44,19 +45,71 @@ const Map = ({ onLocationError, onPOIProximity, pois }: MapProps) => {
       showUserHeading: true
     }));
 
+    // Add the route when the style is loaded
     map.current.on('style.load', () => {
-      map.current?.resize();
-    });
+      if (!map.current) return;
 
-    // Load and add POIs
-    pois.forEach((poi) => {
-      const marker = new mapboxgl.Marker()
-        .setLngLat(poi.coordinates)
-        .setPopup(new mapboxgl.Popup().setHTML(`
-          <h3 class="font-semibold">${poi.name}</h3>
-          <p>${poi.description}</p>
-        `))
-        .addTo(map.current!);
+      map.current.addSource('route', {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'LineString',
+            coordinates: [
+              [4.887611835704689, 52.37964142905949],
+              [4.883177010693288, 52.37489809419134],
+              [4.882443981766414, 52.36664079139621],
+              [4.882883799122766, 52.36608129770255],
+              [4.884899628673111, 52.36686458688985],
+              [4.884533114209091, 52.367312174475444],
+              [4.884826325780779, 52.371317881447936],
+              [4.885119537351244, 52.374495334746],
+              [4.887941698723154, 52.377560689228176],
+              [4.889847573934361, 52.37975329401476],
+              [4.888491470418558, 52.38040210516846],
+              [4.887575184259134, 52.37961905603416]
+            ]
+          }
+        }
+      });
+
+      map.current.addLayer({
+        id: 'route',
+        type: 'line',
+        source: 'route',
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        paint: {
+          'line-color': '#1482FF',
+          'line-width': 4,
+          'line-opacity': 0.8
+        }
+      });
+
+      // Add POI markers
+      const poiCoordinates = [
+        { name: "Keizergracht naar Brouwers", coordinates: [4.889843100194469, 52.37974977474141] },
+        { name: "Noorderkerk", coordinates: [4.887454684643103, 52.379487162752895] },
+        { name: "Huis met Den Hoofden", coordinates: [4.886981607172686, 52.376467393423354] },
+        { name: "Anne Frank Huis", coordinates: [4.8838016826306045, 52.37553316857546] },
+        { name: "Westerkerk", coordinates: [4.883060408403026, 52.37458759069162] }
+      ];
+
+      poiCoordinates.forEach((poi) => {
+        const marker = new mapboxgl.Marker({
+          color: '#1482FF'
+        })
+          .setLngLat(poi.coordinates)
+          .setPopup(new mapboxgl.Popup().setHTML(`
+            <h3 class="font-semibold">${poi.name}</h3>
+          `))
+          .addTo(map.current!);
+      });
+
+      map.current.resize();
     });
 
     // Watch user location
